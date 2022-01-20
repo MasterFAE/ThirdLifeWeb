@@ -80,6 +80,7 @@ const Sidebar = (props: Props) => {
               <div className="sidebar-category-list flex flex-col">
                 <a className="sidebar-category-item">Sıkça Sorulanlar</a>
                 <a className="sidebar-category-item">İletişim</a>
+                <a className="sidebar-category-item">Ayarlar</a>
               </div>
             </div>
           </div>

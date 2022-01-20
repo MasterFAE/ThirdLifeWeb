@@ -1,8 +1,10 @@
 import React, { BaseSyntheticEvent, useState } from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import "../css/Login.css";
+import { useNavigate } from "react-router-dom";
 
-function App() {
+function Login() {
+  let navigate = useNavigate();
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
   const LogIn = (e: BaseSyntheticEvent) => {
@@ -10,6 +12,7 @@ function App() {
   };
   const Register = (e: BaseSyntheticEvent) => {
     e.preventDefault();
+    navigate("/register");
   };
   return (
     <div className="signin-wrapper">
@@ -17,7 +20,7 @@ function App() {
         <h1 className="mb-2">Third Life</h1>
         <h3>Giriş Yap</h3>
         <input
-          className="form-control my-2"
+          className="form-control my-2 h-8"
           required
           placeholder="Email adresinizi giriniz"
           type="email"
@@ -25,14 +28,14 @@ function App() {
           onChange={(e) => setemail(e.target.value)}
         />
         <input
-          className="form-control mb-2"
+          className="form-control mb-2 h-8"
           required
           placeholder="Şifrenizi giriniz"
           type="password"
           value={password}
           onChange={(e) => setpassword(e.target.value)}
         />
-        <a href="#" onClick={(e) => LogIn(e)} className="btn btn-primary">
+        <a href="#" onClick={(e) => LogIn(e)} className="btn btn-primary text-center">
           Giriş Yap
         </a>
         <p>
@@ -46,4 +49,4 @@ function App() {
   );
 }
 
-export default App;
+export default Login;
