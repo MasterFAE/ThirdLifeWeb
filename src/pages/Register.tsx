@@ -1,10 +1,9 @@
 import React, { useState, BaseSyntheticEvent } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 interface Props {}
 
 const Register = (props: Props) => {
-  let navigate = useNavigate();
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
   const [username, setusername] = useState("");
@@ -15,7 +14,7 @@ const Register = (props: Props) => {
     e.preventDefault();
     setStatus(null);
     setError(null);
-    if (email.length == 0 || password.length == 0 || username.length == 0 || confirmpassword.length == 0) {
+    if (email.length === 0 || password.length === 0 || username.length === 0 || confirmpassword.length === 0) {
       setError("Lütfen tüm alanları doldurun!");
       return;
     }
@@ -23,7 +22,13 @@ const Register = (props: Props) => {
       let lastAtPos = email.lastIndexOf("@");
       let lastDotPos = email.lastIndexOf(".");
       if (
-        !(lastAtPos < lastDotPos && lastAtPos > 0 && email.indexOf("@@") == -1 && lastDotPos > 2 && email.length - lastDotPos > 2)
+        !(
+          lastAtPos < lastDotPos &&
+          lastAtPos > 0 &&
+          email.indexOf("@@") === -1 &&
+          lastDotPos > 2 &&
+          email.length - lastDotPos > 2
+        )
       ) {
         setError("Lütfen geçerli email girin!");
         return;
@@ -106,9 +111,9 @@ const Register = (props: Props) => {
         </button>
         <p className="mt-2">
           Giriş ekranına{" "}
-          <a href="#" id="signup-btn" onClick={(e) => navigate("/login")}>
+          <Link to={"/login"} id="signup-btn">
             geri dön
-          </a>
+          </Link>
         </p>
       </form>
     </div>

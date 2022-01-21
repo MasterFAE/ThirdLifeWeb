@@ -1,31 +1,73 @@
 import React, { BaseSyntheticEvent, useState } from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import "../css/Login.css";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { Dispatch } from "redux";
+import { useDispatch } from "react-redux";
+import { User } from "../redux/types";
+import { LogIn as ResolverLogIn } from "../redux/resolvers/userResolver";
 
 function Login() {
-  let navigate = useNavigate();
-  const [email, setemail] = useState("");
+  const [username, setusername] = useState("");
   const [password, setpassword] = useState("");
+  const [Error, setError] = useState<any>(null);
+  const [Status, setStatus] = useState<any>(null);
+  const dispatch: Dispatch<any> = useDispatch();
+  const actionLogin = React.useCallback((data: User) => dispatch(ResolverLogIn(data)), [dispatch]);
   const LogIn = (e: BaseSyntheticEvent) => {
     e.preventDefault();
+    setStatus(null);
+    setError(null);
+    if (password.length === 0 || username.length === 0) {
+      setError("Lütfen tüm alanları doldurun!");
+      return;
+    }
+    if (typeof username !== "undefined") {
+      if (!username.match(/^[a-zA-Z0-9]+$/i)) {
+        setError("Hatalı kullanıcı ismi");
+        return;
+      }
+    }
+
+    axios
+      .post("login", { username: username, password })
+      .then((res) => {
+        if (res.data) {
+          actionLogin(res.data);
+        }
+      })
+      .catch((err) => {
+        if (err.response) {
+          setStatus(null);
+          setError(err.response.data.error);
+        }
+      });
   };
-  const Register = (e: BaseSyntheticEvent) => {
-    e.preventDefault();
-    navigate("/register");
-  };
+
   return (
     <div className="signin-wrapper">
       <form className="text-center row col-6">
         <h1 className="mb-2">Third Life</h1>
         <h3>Giriş Yap</h3>
+        {Error && (
+          <div className="alert alert-danger mb-2 p-0" role="alert">
+            <p className="font-semibold text-center h-full w-full break-words p-1 mb-0 overflow-hidden">{Error}</p>
+          </div>
+        )}
+        {Status && (
+          <div className="alert alert-success mb-2 p-0" role="alert">
+            <p className="font-semibold text-center h-full w-full break-words p-1 mb-0 overflow-hidden">{Status}</p>
+          </div>
+        )}
+
         <input
           className="form-control my-2 h-8"
           required
-          placeholder="Email adresinizi giriniz"
-          type="email"
-          value={email}
-          onChange={(e) => setemail(e.target.value)}
+          placeholder="Kullanıcı giriniz"
+          type="text"
+          value={username}
+          onChange={(e) => setusername(e.target.value)}
         />
         <input
           className="form-control mb-2 h-8"
@@ -35,14 +77,14 @@ function Login() {
           value={password}
           onChange={(e) => setpassword(e.target.value)}
         />
-        <a href="#" onClick={(e) => LogIn(e)} className="btn btn-primary text-center">
+        <Link to={"/"} onClick={(e) => LogIn(e)} className="btn btn-primary text-center">
           Giriş Yap
-        </a>
+        </Link>
         <p>
           Henüz üyeliğiniz yok mu?{" "}
-          <a href="#" id="signup-btn" onClick={(e) => Register(e)}>
+          <Link to={"/register"} id="signup-btn">
             Kayıt Ol
-          </a>
+          </Link>
         </p>
       </form>
     </div>

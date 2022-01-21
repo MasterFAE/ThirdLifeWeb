@@ -1,10 +1,25 @@
+import axios from "axios";
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import "../css/HomePage.css";
+import { Dispatch } from "redux";
+import { useDispatch } from "react-redux";
+import { User } from "../redux/types";
+import { LogOff as ResolverLogOff } from "../redux/resolvers/userResolver";
 
 interface Props {}
 
 const Sidebar = (props: Props) => {
+  const dispatch: Dispatch<any> = useDispatch();
+  const actionLogoff = React.useCallback(() => dispatch(ResolverLogOff()), [dispatch]);
+
   const [policeCollapsable, setpoliceCollapsable] = useState(false);
+
+  const LogOff = () => {
+    axios.delete("logoff").then((res) => {
+      actionLogoff();
+    });
+  };
 
   return (
     <div>
@@ -81,6 +96,9 @@ const Sidebar = (props: Props) => {
                 <a className="sidebar-category-item">Sıkça Sorulanlar</a>
                 <a className="sidebar-category-item">İletişim</a>
                 <a className="sidebar-category-item">Ayarlar</a>
+                <a className="sidebar-category-item" onClick={() => LogOff()}>
+                  Çıkış Yap
+                </a>
               </div>
             </div>
           </div>
