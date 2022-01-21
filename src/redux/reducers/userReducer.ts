@@ -6,7 +6,8 @@ export const LOGOFF_USER = "LOGOFF_USER";
 const userReducer = (state: User = {}, action: UserAction) => {
   switch (action.type) {
     case LOGIN_USER:
-      const { id, username, email, whitelist } = action.payload;
+      var { id, username, email, whitelist } = action.payload;
+      whitelist === 0 ? (whitelist = false) : (whitelist = true);
       return { ...state, id, username, email, whitelist };
     case LOGOFF_USER:
       return {};

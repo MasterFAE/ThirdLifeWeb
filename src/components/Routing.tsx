@@ -8,7 +8,8 @@ import Register from "../pages/Register";
 import { Dispatch } from "redux";
 import { useDispatch, useSelector } from "react-redux";
 import { User } from "../redux/types";
-import { LogIn as ResolverLogIn } from "../redux/resolvers/userResolver";
+import { LogIn as ResolverLogIn, LogOff as ResolverLogOff } from "../redux/resolvers/userResolver";
+import WhitelistBasvuru from "../pages/WhitelistBasvuru";
 
 interface Props {}
 
@@ -16,13 +17,19 @@ const Routing = (props: Props) => {
   const dispatch: Dispatch<any> = useDispatch();
   const user: User = useSelector((state) => state);
   const actionLogin = React.useCallback((data: User) => dispatch(ResolverLogIn(data)), [dispatch]);
+  const actionLogoff = React.useCallback(() => dispatch(ResolverLogOff()), [dispatch]);
   useEffect(() => {
     axios.post("token").then((res) => {
       if (res.data) {
         actionLogin(res.data);
+      } else {
+        ResolverLogOff();
       }
     });
   }, []);
+  if (user === undefined) {
+    return <></>;
+  }
   return (
     <Router>
       <Routes>
@@ -32,11 +39,16 @@ const Routing = (props: Props) => {
             <Route path="login" element={<Login />} />
             <Route path="register" element={<Register />} />
           </>
+        ) : user.whitelist === true ? (
+          <>
+            <Route path="*" element={<Redirect direction={"/"} />} />
+            <Route path="/" element={<App />} />
+          </>
         ) : (
           <>
             <Route path="*" element={<Redirect direction={"/"} />} />
             <Route path="/" element={<App />} />
-            <Route path="register" element={<Register />} />
+            <Route path="whitelist-basvuru" element={<WhitelistBasvuru />} />
           </>
         )}
       </Routes>

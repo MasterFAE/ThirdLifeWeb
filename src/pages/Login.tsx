@@ -63,6 +63,7 @@ function Login() {
 
         <input
           className="form-control my-2 h-8"
+          autoComplete="on"
           required
           placeholder="Kullanıcı giriniz"
           type="text"
@@ -72,14 +73,15 @@ function Login() {
         <input
           className="form-control mb-2 h-8"
           required
+          autoComplete={"current-password"}
           placeholder="Şifrenizi giriniz"
           type="password"
           value={password}
           onChange={(e) => setpassword(e.target.value)}
         />
-        <Link to={"/"} onClick={(e) => LogIn(e)} className="btn btn-primary text-center">
+        <a onClick={(e) => LogIn(e)} className="btn btn-primary text-center">
           Giriş Yap
-        </Link>
+        </a>
         <p>
           Henüz üyeliğiniz yok mu?{" "}
           <Link to={"/register"} id="signup-btn">

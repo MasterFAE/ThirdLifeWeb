@@ -1,22 +1,15 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React from "react";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import "../css/HomePage.css";
 import { Dispatch } from "redux";
-import { useDispatch, useSelector } from "react-redux";
-import { User } from "../redux/types";
 import { LogOff as ResolverLogOff } from "../redux/resolvers/userResolver";
-import NonWLSidebar from "./NonWLSidebar";
 
-interface Props {}
+type Props = {};
 
-const Sidebar = (props: Props) => {
+const NonWLSidebar = (props: Props) => {
   const dispatch: Dispatch<any> = useDispatch();
-  const user: User = useSelector((state) => state);
   const actionLogoff = React.useCallback(() => dispatch(ResolverLogOff()), [dispatch]);
-
-  const [policeCollapsable, setpoliceCollapsable] = useState(false);
-
   const LogOff = () => {
     axios.delete("logoff").then((res) => {
       actionLogoff();
@@ -43,48 +36,15 @@ const Sidebar = (props: Props) => {
               </div>
             </div>
             {/* CATEGORY BİTİŞ */}
-            {/* CATEGORY BAŞLANGIÇ */}
-            <div className="sidebar-category">
-              <p className="text-md opacity-80 font-semibold mb-0">Oyun İçi</p>
-              <div className="sidebar-category-list flex flex-col">
-                <a className="sidebar-category-item">Karakterim</a>
-                <a className="sidebar-category-item">Karakterler</a>
-                <a className="sidebar-category-item">Oluşumlar</a>
-                <div className="sidebar-category-collapsible">
-                  <div className="flex flex-row">
-                    <a className="sidebar-category-item">Polis Departmanı</a>
-                    <a
-                      className="pl-2"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        setpoliceCollapsable(!policeCollapsable);
-                      }}></a>
-                  </div>
-                  {policeCollapsable && (
-                    <div className="transition-transform">
-                      <ul className="p-0 px-3 m-0 flex flex-col">
-                        <a className="sidebar-category-subitem">Duyurular</a>
-                        <a className="sidebar-category-subitem">Kadro</a>
-                        <a className="sidebar-category-subitem">Birimler</a>
-                        <a className="sidebar-category-subitem">Online İhbar</a>
-                      </ul>
-                    </div>
-                  )}
-                </div>
-                <a className="sidebar-category-item">Hastane</a>
-              </div>
-            </div>
           </div>
-          {/* CATEGORY BİTİŞ */}
           {/* CATEGORY BAŞLANGIÇ */}
           <div className="sidebar-body">
             <div className="sidebar-category">
               <p className="text-md opacity-80 font-semibold mb-0">Başvuru</p>
               <div className="sidebar-category-list flex flex-col">
-                <a className="sidebar-category-item">Alt Karakter Başvurusu</a>
-                <a className="sidebar-category-item">Birlik Başvurusu</a>
-                <a className="sidebar-category-item">Rol Başvurusu</a>
-                <a className="sidebar-category-item">Rol Ekibi Başvurusu</a>
+                <Link to={"/whitelist-basvuru"} className="sidebar-category-item">
+                  Karakter Başvurusu
+                </Link>
               </div>
             </div>
           </div>
@@ -111,4 +71,4 @@ const Sidebar = (props: Props) => {
   );
 };
 
-export default Sidebar;
+export default NonWLSidebar;

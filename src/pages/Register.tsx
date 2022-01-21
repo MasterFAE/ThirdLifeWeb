@@ -18,6 +18,14 @@ const Register = (props: Props) => {
       setError("Lütfen tüm alanları doldurun!");
       return;
     }
+    if (password.length < 3 || username.length < 3 || confirmpassword.length < 3) {
+      setError("Kullanıcı ismi ve şifrenizin 3 harften uzun olması gerekli!");
+      return;
+    }
+    if (password !== confirmpassword) {
+      setError("Şifreler eşleşmiyor!");
+      return;
+    }
     if (typeof email !== "undefined") {
       let lastAtPos = email.lastIndexOf("@");
       let lastDotPos = email.lastIndexOf(".");
