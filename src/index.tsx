@@ -5,15 +5,19 @@ import App from "./App";
 import Routing from "./components/Routing";
 import HomePage from "./pages/HomePage";
 import axios from "axios";
-import { createStore, applyMiddleware, Store } from "redux";
+import { createStore, applyMiddleware, Store, combineReducers } from "redux";
 import { Provider } from "react-redux";
 import thunk from "redux-thunk";
-import userReducer from "./redux/reducers/userReducer";
+import user from "./redux/reducers/userReducer";
+import general from "./redux/reducers/generalReducer";
 
 axios.defaults.baseURL = "http://localhost:5555/";
 axios.defaults.withCredentials = true;
+
+const rootReducer = combineReducers({ user, general });
+
 //@ts-ignore
-const store: Store = createStore(userReducer, applyMiddleware(thunk));
+const store: Store = createStore(rootReducer, applyMiddleware(thunk));
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>

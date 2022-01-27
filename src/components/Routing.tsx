@@ -7,32 +7,47 @@ import Login from "../pages/Login";
 import Register from "../pages/Register";
 import { Dispatch } from "redux";
 import { useDispatch, useSelector } from "react-redux";
-import { User } from "../redux/types";
+import { Announcement, Update, User } from "../redux/types";
 import { LogIn as ResolverLogIn, LogOff as ResolverLogOff } from "../redux/resolvers/userResolver";
 import WhitelistBasvuru from "../pages/WhitelistBasvuru";
+import { GetAnnouncements, GetUpdate } from "../redux/resolvers/generalResolver";
 
 interface Props {}
 
 const Routing = (props: Props) => {
   const dispatch: Dispatch<any> = useDispatch();
-  const user: User = useSelector((state) => state);
+  //@ts-ignore
+  const user: User = useSelector((state) => state.user);
   const actionLogin = React.useCallback((data: User) => dispatch(ResolverLogIn(data)), [dispatch]);
+  const actionAnnouncement = React.useCallback((data: Announcement[]) => dispatch(GetAnnouncements(data)), [dispatch]);
+  const actionUpdates = React.useCallback((data: Update[]) => dispatch(GetUpdate(data)), [dispatch]);
+
   const actionLogoff = React.useCallback(() => dispatch(ResolverLogOff()), [dispatch]);
   useEffect(() => {
-    axios.post("token").then((res) => {
-      if (res.data) {
-        actionLogin(res.data);
-      } else {
-        ResolverLogOff();
-      }
-    });
+    /* @ts-ignore */
+    axios
+      .post("token")
+      .then((res) => {
+        if (res.data) {
+          actionLogin(res.data.user);
+          actionAnnouncement(res.data.announcements);
+          actionUpdates(res.data.updates);
+        } else {
+          actionLogoff();
+        }
+      })
+      .catch((error) => {
+        console.error("Error: " + error);
+      });
   }, []);
   if (user === undefined) {
+    console.error("USER NOT FOUND");
     return <></>;
   }
   return (
     <Router>
       <Routes>
+        {/* @ts-ignore */}
         {!user || !user.id ? (
           <>
             <Route path="*" element={<Redirect direction={"/login"} />} />

@@ -12,6 +12,8 @@ const userReducer = (state: User = {}, action: UserAction) => {
     case LOGOFF_USER:
       return {};
     // return { ...state, id: null, username: null, whitelist: null, email: null };
+    default:
+      return state;
   }
 };
 

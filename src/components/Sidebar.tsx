@@ -28,7 +28,9 @@ const Sidebar = (props: Props) => {
       <div className="sidebar-wrapper mr-7 shadow-md">
         <div className="sidebar-container p-4">
           <div className="sidebar-header">
-            <a className="text-xl no-underline text-black font-medium">Third Life</a>
+            <Link to={"/"} className="text-xl no-underline text-black font-medium button sidebar-header-button">
+              Third Life
+            </Link>
           </div>
           <div className="sidebar-body">
             {/* CATEGORY BAŞLANGIÇ */}

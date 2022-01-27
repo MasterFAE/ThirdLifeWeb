@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { Dispatch } from "redux";
 import { LogOff as ResolverLogOff } from "../redux/resolvers/userResolver";
+import "../css/HomePage.css";
 
 type Props = {};
 
@@ -21,7 +22,9 @@ const NonWLSidebar = (props: Props) => {
       <div className="sidebar-wrapper mr-7 shadow-md">
         <div className="sidebar-container p-4">
           <div className="sidebar-header">
-            <a className="text-xl no-underline text-black font-medium">Third Life</a>
+            <Link to={"/"} className="text-xl no-underline text-black font-medium sidebar-header-button">
+              Third Life
+            </Link>
           </div>
           <div className="sidebar-body">
             {/* CATEGORY BAŞLANGIÇ */}
@@ -32,6 +35,7 @@ const NonWLSidebar = (props: Props) => {
                   <a className="sidebar-category-item">Anasayfa</a>
                   <a className="sidebar-category-item">Yönetim Ekibi</a>
                   <a className="sidebar-category-item">Ticket</a>
+                  <a className="sidebar-category-item">Kurallar</a>
                 </div>
               </div>
             </div>

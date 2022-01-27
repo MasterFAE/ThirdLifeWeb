@@ -25,7 +25,8 @@ type Test = {
 };
 
 const WhitelistBasvuru = (props: Props) => {
-  const user: User = useSelector((state) => state);
+  //@ts-ignore
+  const user: User = useSelector((state) => state.user);
   const [Questions, setQuestions] = useState<Question[]>([]);
   const [time, setTime] = useState<string>("00:00");
   const [testId, setTestId] = useState<number>();
@@ -64,8 +65,8 @@ const WhitelistBasvuru = (props: Props) => {
           <h1> Whitelist Başvuru </h1>
         </div>
         <div className="mainpage-container">
-          <div className="flex col-12">
-            <div className="mainpage-maincontent shadow-md col-12 px-4">
+          <div className="flex col-11">
+            <div className="mainpage-maincontent shadow-md col-12 px-4 overflow-y-scroll">
               <div className="basvuru-content-header flex flex-row flex-wrap mb-4">
                 <Link className="col-12 mt-3" to={"/"}>
                   <button className="btn btn-success" onClick={(e) => SendTest()}>
@@ -73,7 +74,7 @@ const WhitelistBasvuru = (props: Props) => {
                   </button>
                 </Link>
               </div>
-              <div className="basvuru-content-container overflow-y-scroll">
+              <div className="basvuru-content-container">
                 {Questions &&
                   Questions.map((item: Question, key) => {
                     return (

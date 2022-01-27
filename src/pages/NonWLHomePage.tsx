@@ -1,9 +1,18 @@
 import React from "react";
+import { Dispatch } from "redux";
+
+import { useDispatch, useSelector } from "react-redux";
 import NonWLSidebar from "../components/NonWLSidebar";
+import { Announcement } from "../redux/types";
+import { Update } from "@reduxjs/toolkit";
 
 type Props = {};
 
 const NonWLHomePage = (props: Props) => {
+  // @ts-ignore
+  const announcements: Announcement[] = useSelector((state) => state.general.announcements);
+  // @ts-ignore
+  const updates: Announcement[] = useSelector((state) => state.general.updates);
   return (
     <main className="main-wrapper flex">
       <NonWLSidebar />
@@ -12,7 +21,7 @@ const NonWLHomePage = (props: Props) => {
           <h1> Anasayfa </h1>
         </div>
         <div className="mainpage-container">
-          <div className="flex flex-wrap flex-md-wrap text-center col-12">
+          {/* <div className="flex flex-wrap flex-md-wrap text-center col-12">
             <div className="mainpage-head-contentitem col-10 shadow-md">
               <div className="px-4">
                 <p className="text-lg font-semibold py-3 mb-0">Başvurular</p>
@@ -26,62 +35,47 @@ const NonWLHomePage = (props: Props) => {
                 </div>
               </div>
             </div>
-          </div>
-          <div className="flex col-12">
-            <div className="mainpage-maincontent shadow-md col-10  px-4 py-3">
+          </div> */}
+          <div className="flex flex-row col-12">
+            <div className="mainpage-maincontent shadow-md col-6  px-4 py-3">
               <div className="mainpage-maincontent-header">
                 <h1 className="text-2xl font-semibold">Duyurular</h1>
               </div>
               <div className="mainpage-maincontent-container">
-                {/* DUYURU START */}
-                <div className="mainpage-duyuru shadow-md">
-                  <div className="mainpage-duyuru-header">
-                    <h1 className="text-base font-semibold">Duyuru Başlığı</h1>
-                  </div>
-                  <div>
-                    <p className="m-0 p-0 text-xs font-medium">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque a condimentum nisl, ullamcorper
-                      pharetra diam. Sed velit justo, scelerisque id vulputate commodo, laoreet a arcu. Nulla non dui volutpat,
-                      viverra.
-                    </p>
-                  </div>
-                </div>
-                {/* DUYURU END */}
+                {announcements.map((xItem) => {
+                  return <Item item={xItem} key={xItem.id} />;
+                })}
+              </div>
+            </div>
 
-                {/* DUYURU START */}
-                <div className="mainpage-duyuru shadow-md">
-                  <div className="mainpage-duyuru-header">
-                    <h1 className="text-base font-semibold">Duyuru Başlığı</h1>
-                  </div>
-                  <div>
-                    <p className="m-0 p-0 text-xs font-medium">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque a condimentum nisl, ullamcorper
-                      pharetra diam. Sed velit justo, scelerisque id vulputate commodo, laoreet a arcu. Nulla non dui volutpat,
-                      viverra.
-                    </p>
-                  </div>
-                </div>
-                {/* DUYURU END */}
-                {/* DUYURU START */}
-                <div className="mainpage-duyuru shadow-md">
-                  <div className="mainpage-duyuru-header">
-                    <h1 className="text-base font-semibold">Duyuru Başlığı</h1>
-                  </div>
-                  <div>
-                    <p className="m-0 p-0 text-xs font-medium">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque a condimentum nisl, ullamcorper
-                      pharetra diam. Sed velit justo, scelerisque id vulputate commodo, laoreet a arcu. Nulla non dui volutpat,
-                      viverra.
-                    </p>
-                  </div>
-                </div>
-                {/* DUYURU END */}
+            <div className="mainpage-maincontent shadow-md col-6  px-4 py-3">
+              <div className="mainpage-maincontent-header">
+                <h1 className="text-2xl font-semibold">Güncellemeler</h1>
+              </div>
+              <div className="mainpage-maincontent-container">
+                {updates.map((xItem) => {
+                  return <Item item={xItem} key={xItem.id} />;
+                })}
               </div>
             </div>
           </div>
         </div>
       </div>
     </main>
+  );
+};
+
+const Item = (props: any) => {
+  const { item } = props;
+  return (
+    <div className="mainpage-duyuru shadow-md">
+      <div className="mainpage-duyuru-header">
+        <h1 className="text-base font-semibold">{item.title}</h1>
+      </div>
+      <div>
+        <p className="m-0 p-0 text-xs font-medium">{item.description}</p>
+      </div>
+    </div>
   );
 };
 

@@ -5,8 +5,9 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Dispatch } from "redux";
 import { useDispatch } from "react-redux";
-import { User } from "../redux/types";
+import { Announcement, Update, User } from "../redux/types";
 import { LogIn as ResolverLogIn } from "../redux/resolvers/userResolver";
+import { GetAnnouncements, GetUpdate } from "../redux/resolvers/generalResolver";
 
 function Login() {
   const [username, setusername] = useState("");
@@ -15,6 +16,9 @@ function Login() {
   const [Status, setStatus] = useState<any>(null);
   const dispatch: Dispatch<any> = useDispatch();
   const actionLogin = React.useCallback((data: User) => dispatch(ResolverLogIn(data)), [dispatch]);
+  const actionAnnouncement = React.useCallback((data: Announcement[]) => dispatch(GetAnnouncements(data)), [dispatch]);
+  const actionUpdates = React.useCallback((data: Update[]) => dispatch(GetUpdate(data)), [dispatch]);
+
   const LogIn = (e: BaseSyntheticEvent) => {
     e.preventDefault();
     setStatus(null);
@@ -34,7 +38,9 @@ function Login() {
       .post("login", { username: username, password })
       .then((res) => {
         if (res.data) {
-          actionLogin(res.data);
+          actionLogin(res.data.user);
+          actionAnnouncement(res.data.announcements);
+          actionUpdates(res.data.updates);
         }
       })
       .catch((err) => {
