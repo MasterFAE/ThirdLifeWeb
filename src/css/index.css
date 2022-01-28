@@ -2,6 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --bgpage: #20202000;
+  --bgcontent: #331a04a1; /*#1a1a1acc;*/
+  --tw-gradient-stops: var(--redColor), var(--brandColor);
+  --brandColor: #f1c40f;
+  --textColor: rgb(255, 255, 255);
+  --textHoverColor: rgba(219, 219, 219, 0.867);
+  --redColor: #b11315; /*#d63c30 */
+  --greenColor: #2ecc71;
+  --bginput: #20202000;
+  --bglogin: #1a1a1aee;
+}
+
 #root {
   height: 100%;
   background-color: "#cacaca";
@@ -17,4 +30,16 @@ body {
 
 html {
   height: -webkit-fill-available;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+  background-color: var(--brandColor);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #705300;
+  border-radius: 10px;
 }

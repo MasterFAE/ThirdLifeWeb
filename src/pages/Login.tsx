@@ -9,11 +9,12 @@ import { Announcement, Update, User } from "../redux/types";
 import { LogIn as ResolverLogIn } from "../redux/resolvers/userResolver";
 import { GetAnnouncements, GetUpdate } from "../redux/resolvers/generalResolver";
 
-function Login() {
+function Login(props: any) {
+  const { confirmed } = props;
   const [username, setusername] = useState("");
   const [password, setpassword] = useState("");
   const [Error, setError] = useState<any>(null);
-  const [Status, setStatus] = useState<any>(null);
+  const [Status, setStatus] = useState<any>(confirmed ? "Email doğrulandı artık giriş yapabilirsiniz!" : null);
   const dispatch: Dispatch<any> = useDispatch();
   const actionLogin = React.useCallback((data: User) => dispatch(ResolverLogIn(data)), [dispatch]);
   const actionAnnouncement = React.useCallback((data: Announcement[]) => dispatch(GetAnnouncements(data)), [dispatch]);
@@ -53,8 +54,10 @@ function Login() {
 
   return (
     <div className="signin-wrapper">
-      <form className="text-center row col-6">
-        <h1 className="mb-2">Third Life</h1>
+      <form className="text-center row col-6 shadow-md">
+        <h1 className="mb-2" id="login-title">
+          Third Life
+        </h1>
         <h3>Giriş Yap</h3>
         {Error && (
           <div className="alert alert-danger mb-2 p-0" role="alert">
@@ -68,16 +71,16 @@ function Login() {
         )}
 
         <input
-          className="form-control my-2 h-8"
+          className="login-input form-control my-2 h-8 "
           autoComplete="on"
           required
-          placeholder="Kullanıcı giriniz"
+          placeholder="Kullanıcı adını giriniz"
           type="text"
           value={username}
           onChange={(e) => setusername(e.target.value)}
         />
         <input
-          className="form-control mb-2 h-8"
+          className="login-input form-control mb-2 h-8"
           required
           autoComplete={"current-password"}
           placeholder="Şifrenizi giriniz"
@@ -85,15 +88,15 @@ function Login() {
           value={password}
           onChange={(e) => setpassword(e.target.value)}
         />
-        <a onClick={(e) => LogIn(e)} className="btn btn-primary text-center">
+        <a onClick={(e) => LogIn(e)} className="login-button btn btn-outline-primary text-center mb-2">
           Giriş Yap
         </a>
-        <p>
-          Henüz üyeliğiniz yok mu?{" "}
-          <Link to={"/register"} id="signup-btn">
-            Kayıt Ol
-          </Link>
-        </p>
+        <Link to={"/register"} className="login-extra-link">
+          Şifremi unuttum
+        </Link>
+        <Link to={"/register"} className="login-extra-link">
+          Kayıt Ol
+        </Link>
       </form>
     </div>
   );

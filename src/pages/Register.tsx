@@ -7,6 +7,8 @@ const Register = (props: Props) => {
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
   const [username, setusername] = useState("");
+  const [steam, setSteam] = useState("");
+  const [discord, setDiscord] = useState<any>();
   const [confirmpassword, setconfirmpassword] = useState("");
   const [Error, setError] = useState<any>(null);
   const [Status, setStatus] = useState<any>(null);
@@ -14,8 +16,16 @@ const Register = (props: Props) => {
     e.preventDefault();
     setStatus(null);
     setError(null);
-    if (email.length === 0 || password.length === 0 || username.length === 0 || confirmpassword.length === 0) {
-      setError("Lütfen tüm alanları doldurun!");
+    if (
+      email.length === 0 ||
+      password.length === 0 ||
+      username.length === 0 ||
+      confirmpassword.length === 0 ||
+      discord.length == 0 ||
+      steam.length == 0 ||
+      discord.length < 15
+    ) {
+      setError("Lütfen tüm alanları eksiksiz doldurun!");
       return;
     }
     if (password.length < 3 || username.length < 3 || confirmpassword.length < 3) {
@@ -42,6 +52,18 @@ const Register = (props: Props) => {
         return;
       }
     }
+    let steamIndex = steam.lastIndexOf("steam");
+    let otherIndex = steam.lastIndexOf(":");
+    if (
+      steam.length < 10 ||
+      typeof steam === "undefined" ||
+      otherIndex === -1 ||
+      steamIndex === -1 ||
+      (steamIndex !== 0 && otherIndex !== 5)
+    ) {
+      setError("Lütfen geçerli steam hex kodu giriniz!");
+      return;
+    }
 
     if (typeof username !== "undefined") {
       if (!username.match(/^[a-zA-Z0-9]+$/i)) {
@@ -50,12 +72,14 @@ const Register = (props: Props) => {
       }
     }
     axios
-      .post("register", { email, password, username })
+      .post("register", { email, password, username, steam, discord })
       .then((res) => {
         setemail("");
         setusername("");
         setconfirmpassword("");
         setpassword("");
+        setDiscord("");
+        setSteam("");
         setError(null);
         setStatus("Hesap başarıyla oluşturuldu!");
       })
@@ -69,7 +93,9 @@ const Register = (props: Props) => {
   return (
     <div className="signin-wrapper">
       <form className="text-center row col-6">
-        <h1 className="mb-2">Third Life</h1>
+        <h1 className="mb-2" id="login-title">
+          Third Life
+        </h1>
         <h3>Kayıt Ol</h3>
         {Error && (
           <div className="alert alert-danger mb-2 p-0" role="alert">
@@ -83,7 +109,7 @@ const Register = (props: Props) => {
         )}
 
         <input
-          className="form-control my-2 h-8"
+          className="login-input form-control my-2 h-8"
           required
           placeholder="Email adresinizi giriniz"
           type="email"
@@ -91,7 +117,7 @@ const Register = (props: Props) => {
           onChange={(e) => setemail(e.target.value)}
         />
         <input
-          className="form-control mb-2 h-8"
+          className="login-input form-control mb-2 h-8"
           required
           placeholder="Kullanıcı adınızı giriniz"
           type="text"
@@ -99,7 +125,7 @@ const Register = (props: Props) => {
           onChange={(e) => setusername(e.target.value)}
         />
         <input
-          className="form-control mb-2 h-8"
+          className="login-input form-control mb-2 h-8"
           required
           placeholder="Şifrenizi giriniz"
           type="password"
@@ -107,22 +133,35 @@ const Register = (props: Props) => {
           onChange={(e) => setpassword(e.target.value)}
         />
         <input
-          className="form-control mb-2 h-8"
+          className="login-input form-control mb-2 h-8"
           required
-          placeholder="Şifrenizi giriniz"
+          placeholder="Şifrenizi tekrar giriniz"
           type="password"
           value={confirmpassword}
           onChange={(e) => setconfirmpassword(e.target.value)}
         />
-        <button type="submit" onClick={(e) => Register(e)} className="btn btn-primary text-center">
+        <input
+          className="login-input form-control mb-2 h-8"
+          required
+          placeholder="Steam HEX'inizi giriniz [Ör: steam:11000010679d054]"
+          type="text"
+          value={steam}
+          onChange={(e) => setSteam(e.target.value)}
+        />
+        <input
+          className="login-input form-control mb-2 h-8"
+          required
+          placeholder="Discord ID'inizi giriniz [Ör: 140141541854281728]"
+          type="text"
+          value={discord}
+          onChange={(e) => setDiscord(e.target.value)}
+        />
+        <button type="submit" onClick={(e) => Register(e)} className="login-button btn btn-outline-primary text-center">
           Kayıt Ol
         </button>
-        <p className="mt-2">
-          Giriş ekranına{" "}
-          <Link to={"/login"} id="signup-btn">
-            geri dön
-          </Link>
-        </p>
+        <Link to={"/login"} id="signup-btn" className="login-extra-link mt-2">
+          Giriş ekranına geri dön
+        </Link>
       </form>
     </div>
   );

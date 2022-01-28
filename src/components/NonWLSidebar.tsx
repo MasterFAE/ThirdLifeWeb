@@ -20,9 +20,9 @@ const NonWLSidebar = (props: Props) => {
     <div>
       {/* SIDEBAR BAŞLANGIÇ */}
       <div className="sidebar-wrapper mr-7 shadow-md">
-        <div className="sidebar-container p-4">
+        <div className="sidebar-container px-3 py-4">
           <div className="sidebar-header">
-            <Link to={"/"} className="text-xl no-underline text-black font-medium sidebar-header-button">
+            <Link to={"/"} className="text-xl no-underline font-medium sidebar-header-button">
               Third Life
             </Link>
           </div>
@@ -30,9 +30,11 @@ const NonWLSidebar = (props: Props) => {
             {/* CATEGORY BAŞLANGIÇ */}
             <div className="sidebar-body">
               <div className="sidebar-category">
-                <p className="text-md opacity-80 font-semibold mb-0">Genel</p>
+                <p className="sidebar-category-header text-md opacity-80 font-semibold mb-0 ">Genel</p>
                 <div className="sidebar-category-list flex flex-col">
-                  <a className="sidebar-category-item">Anasayfa</a>
+                  <Link to={"/"} className="sidebar-category-item">
+                    Anasayfa
+                  </Link>
                   <a className="sidebar-category-item">Yönetim Ekibi</a>
                   <a className="sidebar-category-item">Ticket</a>
                   <a className="sidebar-category-item">Kurallar</a>
@@ -44,7 +46,7 @@ const NonWLSidebar = (props: Props) => {
           {/* CATEGORY BAŞLANGIÇ */}
           <div className="sidebar-body">
             <div className="sidebar-category">
-              <p className="text-md opacity-80 font-semibold mb-0">Başvuru</p>
+              <p className="sidebar-category-header text-md opacity-80 font-semibold mb-0">Başvuru</p>
               <div className="sidebar-category-list flex flex-col">
                 <Link to={"/whitelist-basvuru"} className="sidebar-category-item">
                   Karakter Başvurusu
@@ -56,7 +58,7 @@ const NonWLSidebar = (props: Props) => {
           {/* CATEGORY BAŞLANGIÇ */}
           <div className="sidebar-body">
             <div className="sidebar-category">
-              <p className="text-md opacity-80 font-semibold mb-0">Diğer</p>
+              <p className="sidebar-category-header text-md opacity-80 font-semibold mb-0">Diğer</p>
               <div className="sidebar-category-list flex flex-col">
                 <a className="sidebar-category-item">Sıkça Sorulanlar</a>
                 <a className="sidebar-category-item">İletişim</a>

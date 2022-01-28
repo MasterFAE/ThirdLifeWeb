@@ -17,9 +17,9 @@ const NonWLHomePage = (props: Props) => {
     <main className="main-wrapper flex">
       <NonWLSidebar />
       <div className="container mainpage-wrapper">
-        <div className="mainpage-header ">
+        {/* <div className="mainpage-header ">
           <h1> Anasayfa </h1>
-        </div>
+        </div> */}
         <div className="mainpage-container">
           {/* <div className="flex flex-wrap flex-md-wrap text-center col-12">
             <div className="mainpage-head-contentitem col-10 shadow-md">
@@ -36,7 +36,7 @@ const NonWLHomePage = (props: Props) => {
               </div>
             </div>
           </div> */}
-          <div className="flex flex-row col-12">
+          <div className="flex flex-row col-12 mt-4">
             <div className="mainpage-maincontent shadow-md col-6  px-4 py-3">
               <div className="mainpage-maincontent-header">
                 <h1 className="text-2xl font-semibold">Duyurular</h1>
@@ -68,12 +68,12 @@ const NonWLHomePage = (props: Props) => {
 const Item = (props: any) => {
   const { item } = props;
   return (
-    <div className="mainpage-duyuru shadow-md">
-      <div className="mainpage-duyuru-header">
+    <div className="mainpage-subcontent shadow-md">
+      <div className="mainpage-subcontent-header">
         <h1 className="text-base font-semibold">{item.title}</h1>
       </div>
-      <div>
-        <p className="m-0 p-0 text-xs font-medium">{item.description}</p>
+      <div className="mainpage-subcontent-body">
+        <p className=" m-0 p-0 text-xs font-medium">{item.description}</p>
       </div>
     </div>
   );

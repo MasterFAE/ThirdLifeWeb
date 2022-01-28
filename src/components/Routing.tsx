@@ -51,7 +51,8 @@ const Routing = (props: Props) => {
         {!user || !user.id ? (
           <>
             <Route path="*" element={<Redirect direction={"/login"} />} />
-            <Route path="login" element={<Login />} />
+            <Route path="login" element={<Login confirmed={false} />} />
+            <Route path="/login/:id" element={<Login confirmed={true} />} />
             <Route path="register" element={<Register />} />
           </>
         ) : user.whitelist === true ? (

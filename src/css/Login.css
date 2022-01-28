@@ -11,16 +11,58 @@
   -webkit-box-pack: center;
   justify-content: center;
   padding-bottom: 40px;
-  background-color: #f5f5f5;
 }
 
 .signin-wrapper form {
+  padding: 4vh;
   width: 100%;
   max-width: 350px;
+  background-color: var(--bglogin);
+  border-radius: 2vh;
 }
 
-#signup-btn {
+.login-input:focus {
+  outline: none;
+  background-color: var(--bginput);
+  color: var(--textColor);
+}
+
+.login-input::placeholder {
+  color: var(--textColor);
+  opacity: 0.8;
+}
+
+.login-input {
+  border: 0;
+  border-radius: 1px;
+  border-bottom: 1px solid;
+  border-image: linear-gradient(to right, var(--tw-gradient-stops)) 90;
+  outline: none;
+  color: var(--textColor);
+  background-color: var(--bginput);
+}
+
+#login-title {
+  opacity: 0.9;
+  color: var(--brandColor);
+}
+
+.login-button {
+  border-color: var(--brandColor);
+  color: var(--brandColor);
+}
+.login-button:hover {
+  border-color: var(--brandColor);
+  background-color: var(--brandColor);
+}
+
+.login-extra-link {
+  font-weight: 400;
+  padding: 0;
   text-decoration: none;
-  color: black;
-  font-weight: 600;
+  color: var(--textColor);
+}
+
+.login-extra-link:hover {
+  color: var(--textHoverColor);
 }
