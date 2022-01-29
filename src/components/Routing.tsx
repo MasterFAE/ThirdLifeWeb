@@ -9,8 +9,14 @@ import { Dispatch } from "redux";
 import { useDispatch, useSelector } from "react-redux";
 import { Announcement, Update, User } from "../redux/types";
 import { LogIn as ResolverLogIn, LogOff as ResolverLogOff } from "../redux/resolvers/userResolver";
-import WhitelistBasvuru from "../pages/WhitelistBasvuru";
 import { GetAnnouncements, GetUpdate } from "../redux/resolvers/generalResolver";
+import NonWLSidebar from "./NonWLSidebar";
+import WhitelistBasvuru from "../pages/WhitelistBasvuru";
+import WhitelistBasvuru_Exam from "../pages/WhitelistBasvuru_Exam";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
+library.add(faSpinner);
 
 interface Props {}
 
@@ -40,10 +46,12 @@ const Routing = (props: Props) => {
         console.error("Error: " + error);
       });
   }, []);
+
   if (user === undefined) {
     console.error("USER NOT FOUND");
     return <></>;
   }
+  if (user.loading) return <LoadingComponent></LoadingComponent>;
   return (
     <Router>
       <Routes>
@@ -51,7 +59,7 @@ const Routing = (props: Props) => {
         {!user || !user.id ? (
           <>
             <Route path="*" element={<Redirect direction={"/login"} />} />
-            <Route path="login" element={<Login confirmed={false} />} />
+            <Route path="/login" element={<Login confirmed={false} />} />
             <Route path="/login/:id" element={<Login confirmed={true} />} />
             <Route path="register" element={<Register />} />
           </>
@@ -65,12 +73,35 @@ const Routing = (props: Props) => {
             <Route path="*" element={<Redirect direction={"/"} />} />
             <Route path="/" element={<App />} />
             <Route path="whitelist-basvuru" element={<WhitelistBasvuru />} />
+            <Route path="whitelist-exam" element={<WhitelistBasvuru_Exam />} />
           </>
         )}
       </Routes>
     </Router>
   );
 };
+
+export const LoadingComponent = (props: any) => {
+  return (
+    <main className="main-wrapper flex">
+      <div className="sidebar-wrapper mr-7 shadow-md" style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
+        <FontAwesomeIcon className="col-12 h-100 " icon="spinner" pulse size="2x" />
+      </div>
+      <div className="container mainpage-wrapper">
+        <div className="mainpage-container">
+          <div className="flex col-12 pt-2">
+            <div
+              className="mainpage-maincontent shadow-md text-center col-12 px-4 pb-4"
+              style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
+              <FontAwesomeIcon className="col-12 h-100 " icon="spinner" pulse size="2x" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  );
+};
+
 const Redirect = (props: any) => {
   let navigator = useNavigate();
   useEffect(() => {

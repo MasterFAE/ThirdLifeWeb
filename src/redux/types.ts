@@ -3,6 +3,12 @@ export type User = {
   username?: string;
   email?: string;
   whitelist?: boolean;
+  canApply?: number;
+  isAdmin?: number;
+  isModerator?: number;
+  steam?: string;
+  discord?: string;
+  loading?: boolean;
 };
 
 export type UserAction = {

@@ -12,10 +12,12 @@ const generalReducer = (state = initialState, action: DispatchAction) => {
   switch (action.type) {
     case GET_ANNOUNCEMENTS:
       state.announcements = action.payload;
-      return state;
+      console.log(action.payload);
+
+      return { ...state };
     case GET_UPDATES:
       state.updates = action.payload;
-      return state;
+      return { ...state };
     default:
       return state;
   }

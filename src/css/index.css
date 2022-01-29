@@ -35,11 +35,11 @@ html {
 /* width */
 ::-webkit-scrollbar {
   width: 10px;
-  background-color: var(--brandColor);
+  background-color: #705300;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #705300;
+  background: var(--brandColor);
   border-radius: 10px;
 }

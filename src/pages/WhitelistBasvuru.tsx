@@ -1,112 +1,49 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import React from "react";
 import { Link } from "react-router-dom";
 import NonWLSidebar from "../components/NonWLSidebar";
-import { User } from "../redux/types";
 
 type Props = {};
-type Option = {
-  id: number;
-  text: string;
-};
-
-type Question = {
-  id: number;
-  question: string;
-  selected: any;
-  options: Option[];
-  category: string;
-};
-
-type Test = {
-  id: number;
-  questions: Question[];
-};
 
 const WhitelistBasvuru = (props: Props) => {
-  //@ts-ignore
-  const user: User = useSelector((state) => state.user);
-  const [Questions, setQuestions] = useState<Question[]>([]);
-  const [time, setTime] = useState<string>("00:00");
-  const [testId, setTestId] = useState<number>();
-  const [seconds, setSeconds] = useState<number>(1);
-  const [minutes, setMinutes] = useState<number>(0);
-  useEffect(() => {
-    axios
-      .get("whitelist-basvuru")
-      .then((res) => {
-        setTestId(res.data.id);
-        setQuestions(res.data.questions);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  }, []);
-
-  const HandleChange = (id: number, key: number, item: Question) => {
-    var dummy: Question[] = Questions;
-    dummy[key].selected = dummy[key].selected === id ? null : id;
-    setQuestions([...dummy]);
-  };
-
-  const SendTest = () => {
-    axios
-      .post("whitelist-basvuru", { userid: user.id, timer: 0, id: testId, test: Questions })
-      .then((res) => console.log(res))
-      .catch((error) => console.error(error));
-  };
-
   return (
     <main className="main-wrapper flex">
       <NonWLSidebar />
       <div className="container mainpage-wrapper">
-        <div className="mainpage-header mt-4 mb-0">
-          <h1> Whitelist Başvuru </h1>
-        </div>
         <div className="mainpage-container">
-          <div className="flex col-11">
-            <div className="mainpage-maincontent shadow-md col-12 px-4 overflow-y-scroll">
-              <div className="basvuru-content-header flex flex-row flex-wrap mb-4">
-                <Link className="col-12 mt-3" to={"/"}>
-                  <button className="btn btn-success" onClick={(e) => SendTest()}>
-                    Gönder
-                  </button>
-                </Link>
-              </div>
-              <div className="basvuru-content-container">
-                {Questions &&
-                  Questions.map((item: Question, key) => {
-                    return (
-                      <div className="basvuru-soru shadow-md pb-3" key={key}>
-                        <div className="basvuru-soru-header">
-                          <h6 className="text-sm font-semibold select-none">
-                            Soru {key + 1}: {item.question}
-                          </h6>
-                        </div>
-                        <div>
-                          {item.options.map((option: Option, key2) => {
-                            return (
-                              <div className="flex" key={key2}>
-                                <div className="pt-1">
-                                  <input
-                                    type="checkbox"
-                                    checked={item.selected === option.id}
-                                    onChange={(e) => HandleChange(option.id, key, item)}></input>
-                                </div>
-                                <h6
-                                  className="text-sm m-0 pb-1 pt-1 px-2 cursor-default select-none"
-                                  onClick={(e) => HandleChange(option.id, key, item)}>
-                                  {option.text}
-                                </h6>
-                              </div>
-                            );
-                          })}
-                        </div>
-                      </div>
-                    );
-                  })}
-              </div>
+          <div className="flex col-12 pt-2">
+            <div className="mainpage-maincontent shadow-md text-center col-12 px-4 pb-4">
+              <h1 className="mt-4">Uyarı</h1>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus semper ipsum augue, a facilisis arcu porttitor
+                tempus. Curabitur a dignissim dolor. Praesent nunc mi, maximus quis viverra at, vehicula nec elit. Suspendisse
+                dapibus mattis sem, ac viverra neque. Curabitur accumsan odio id vulputate pharetra. Orci varius natoque penatibus
+                et magnis dis parturient montes, nascetur ridiculus mus. Vestibulum dapibus dignissim lacus, quis dapibus orci
+                facilisis eget.
+              </p>
+              <p>
+                Duis nec sem vitae metus rhoncus euismod a quis tellus. Maecenas at mi nec purus commodo placerat in vitae eros.
+                Sed et mattis velit, vel pharetra metus. Duis non rutrum nibh. Etiam viverra velit libero, sit amet venenatis
+                lorem porttitor vitae. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+                Vestibulum eleifend a libero et commodo. Quisque laoreet scelerisque erat, eget elementum mauris maximus ut. Duis
+                ultrices dolor turpis, eget elementum diam cursus quis. Vivamus dictum magna eu velit posuere sagittis. Praesent
+                vulputate est non neque fringilla posuere. Donec dapibus lectus libero, nec tristique lectus maximus id.
+                Vestibulum quis est ac mauris ullamcorper auctor a eu dui. Phasellus eget arcu quis mi luctus porttitor sit amet
+                in turpis. Integer porta aliquam nulla ut sagittis. In vulputate justo sed leo bibendum viverra. Aenean sit amet
+                tortor ut sapien varius consequat. Suspendisse potenti.
+              </p>
+              <p>
+                Sed dui mi, fringilla id dolor ac, euismod tincidunt eros. Duis mauris diam, ultrices sit amet pharetra nec,
+                elementum non tellus. Maecenas felis massa, eleifend eu magna in, rhoncus dignissim turpis. Aenean a laoreet
+                magna, quis vehicula est. Duis eget turpis faucibus erat mattis sodales quis a est. Duis at augue tortor. Donec
+                vitae urna id sapien consectetur bibendum. Nunc libero libero, varius vel massa in, elementum rutrum sapien.
+                Quisque elementum, libero nec lacinia faucibus, velit leo tempus dui, in ornare ex arcu vitae turpis. Praesent
+                varius arcu at tellus tempus ultricies. Etiam nec eros ut ex rutrum tempor. Maecenas mi tortor, malesuada ac
+                imperdiet sit amet, pulvinar nec velit. In libero nisi, auctor eget elit at, maximus pharetra est. Phasellus sem
+                augue, pretium tempus mauris ut, pellentesque gravida tellus. Nunc sagittis ut neque ac sodales.
+              </p>
+              <Link to={"/whitelist-exam"} className="login-button col-4 mt-4 mb-8 btn btn-outline-primary">
+                Başvuru Yap
+              </Link>
             </div>
           </div>
         </div>

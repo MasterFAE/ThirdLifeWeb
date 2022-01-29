@@ -101,8 +101,9 @@ body {
   margin-top: 4vh;
   width: 80vh;
   max-width: 100%;
-  min-height: 70vh;
-  height: fit-content;
+  min-height: 80vh;
+  height: max-content;
+  max-height: 92.5vh;
   border-radius: 2vh;
   overflow-y: auto;
   flex-shrink: 0;
