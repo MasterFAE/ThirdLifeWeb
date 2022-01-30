@@ -16,7 +16,7 @@ const NonWLHomePage = (props: Props) => {
   return (
     <main className="container-fluid main-wrapper flex">
       <NonWLSidebar />
-      <div className=" mainpage-wrapper min-w-screen">
+      <div className="mainpage-wrapper min-w-screen">
         {/* <div className="mainpage-header ">
           <h1> Anasayfa </h1>
         </div> */}

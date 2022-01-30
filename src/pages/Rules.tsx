@@ -24,7 +24,7 @@ const Rules = (props: Props) => {
   return (
     <main className="container-fluid main-wrapper flex flex-row">
       <NonWLSidebar />
-      <div className="container mainpage-wrapper ">
+      <div className="mainpage-wrapper ">
         <div className="mainpage-container flex mt-4 pb-8">
           <div className="mainpage-maincontent shadow-md px-4">
             <span className="text-center">

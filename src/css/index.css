@@ -4,20 +4,28 @@
 
 :root {
   --bgpage: #20202000;
-  --bgcontent: #331a04a1; /*#1a1a1acc;*/
-  --tw-gradient-stops: var(--redColor), var(--brandColor);
-  --brandColor: #f1c40f;
+  /* --bgcontent: #331a04a1; */
+  --bgcontent: #000000be;
+  /* --tw-gradient-stops: var(--redColor), var(--brandColor); */
+  --tw-gradient-stops: #c98d1d, #fcb42b, #ffb333, #d4a333;
+  --brandColor: #fdb629;
+  /* --brandColor: #f1c40f; */
   --textColor: rgb(255, 255, 255);
   --textHoverColor: rgba(219, 219, 219, 0.867);
   --redColor: #b11315; /*#d63c30 */
   --greenColor: #2ecc71;
   --bginput: #20202000;
-  --bglogin: #1a1a1aee;
+  --bglogin: #1a1a1ad7;
 }
 
 #root {
   height: 100%;
   background-color: "#cacaca";
+}
+
+#root main {
+  margin: 0;
+  padding: 0;
 }
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;

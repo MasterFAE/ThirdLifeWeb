@@ -30,9 +30,9 @@ const WhitelistBasvuru = (props: Props) => {
       .catch((err) => console.error(err));
   }, []);
   return (
-    <main className="main-wrapper flex">
+    <main className="container-fluid main-wrapper flex">
       <NonWLSidebar />
-      <div className="container mainpage-wrapper ">
+      <div className="mainpage-wrapper ">
         {Error && (
           <div className="alert alert-danger mb-2 mt-4 p-0" role="alert">
             <p className="font-semibold text-center h-full w-full break-words p-1 mb-0 overflow-hidden">{Error}</p>

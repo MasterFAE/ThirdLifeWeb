@@ -1,5 +1,7 @@
 body {
-  background-image: linear-gradient(to right, var(--tw-gradient-stops));
+  --ee: #c49334, #ffb42a, #ffb42a, #c49334;
+  background-image: linear-gradient(to left, var(--tw-gradient-stops));
+  /* background-color: var(--bglogin); */
   overflow-y: hidden;
   color: var(--textColor);
 }
@@ -18,7 +20,7 @@ body {
   max-width: 200px;
   border-top-right-radius: 1vh;
   border-bottom-right-radius: 1vh;
-  background-color: #e74d3c00;
+  background-color: var(--bgcontent);
 }
 /* #e74d3c62; */
 

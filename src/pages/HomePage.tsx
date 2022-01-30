@@ -59,8 +59,8 @@ const HomePage = (props: Props) => {
                 ]}
               />
             </div>
-            <div className="flex col-12 flex-wrap ">
-              <div className="mainpage-maincontent shadow-md  col-6  px-4 py-3">
+            <div className="flex col-12 flex-wrap mt-4">
+              <div className="mainpage-maincontent shadow-md  col-6 px-4 py-3">
                 <div className="mainpage-maincontent-header">
                   <h1 className="text-2xl font-semibold">Duyurular</h1>
                 </div>
