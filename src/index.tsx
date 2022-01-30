@@ -13,6 +13,7 @@ import general from "./redux/reducers/generalReducer";
 
 axios.defaults.baseURL = "http://localhost:5555/";
 axios.defaults.withCredentials = true;
+axios.defaults.headers.post["Content-Type"] = "application/json";
 
 const rootReducer = combineReducers({ user, general });
 

@@ -14,30 +14,15 @@ const NonWLHomePage = (props: Props) => {
   // @ts-ignore
   const updates: Announcement[] = useSelector((state) => state.general.updates);
   return (
-    <main className="main-wrapper flex">
+    <main className="container-fluid main-wrapper flex">
       <NonWLSidebar />
-      <div className="container mainpage-wrapper">
+      <div className=" mainpage-wrapper min-w-screen">
         {/* <div className="mainpage-header ">
           <h1> Anasayfa </h1>
         </div> */}
-        <div className="mainpage-container">
-          {/* <div className="flex flex-wrap flex-md-wrap text-center col-12">
-            <div className="mainpage-head-contentitem col-10 shadow-md">
-              <div className="px-4">
-                <p className="text-lg font-semibold py-3 mb-0">Başvurular</p>
-                <p className="text-lg font-semibold">3 Başvuru</p>
-                <div className="mainpage-head-content-subitem">
-                  <ul className="list-none p-0 my-2">
-                    <p className="text-xs m-0 font-medium">2 Reddedilen</p>
-                    <p className="text-xs m-0 font-medium">1 Beklemede</p>
-                    <p className="text-xs m-0 font-medium">0 Kabul Edilen</p>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div> */}
-          <div className="flex flex-row col-12 mt-4">
-            <div className="mainpage-maincontent shadow-md col-6  px-4 py-3">
+        <div className="mainpage-container ">
+          <div className="flex flex-row flex-wrap col-12">
+            <div className="mainpage-maincontent shadow-md col-6 px-4 pt-3 my-2">
               <div className="mainpage-maincontent-header">
                 <h1 className="text-2xl font-semibold">Duyurular</h1>
               </div>
@@ -48,7 +33,7 @@ const NonWLHomePage = (props: Props) => {
               </div>
             </div>
 
-            <div className="mainpage-maincontent shadow-md col-6  px-4 py-3">
+            <div className="mainpage-maincontent shadow-md col-6  px-4 pt-3 my-2">
               <div className="mainpage-maincontent-header">
                 <h1 className="text-2xl font-semibold">Güncellemeler</h1>
               </div>

@@ -1,24 +1,39 @@
-import React, { BaseSyntheticEvent, useState } from "react";
+import React, { BaseSyntheticEvent, useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import "../css/Login.css";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { Dispatch } from "redux";
 import { useDispatch } from "react-redux";
 import { Announcement, Update, User } from "../redux/types";
 import { LogIn as ResolverLogIn } from "../redux/resolvers/userResolver";
 import { GetAnnouncements, GetUpdate } from "../redux/resolvers/generalResolver";
+import { faChessKnight } from "@fortawesome/free-solid-svg-icons";
 
 function Login(props: any) {
-  const { confirmed } = props;
+  const { confirmId } = useParams();
   const [username, setusername] = useState("");
   const [password, setpassword] = useState("");
   const [Error, setError] = useState<any>(null);
-  const [Status, setStatus] = useState<any>(confirmed ? "Email doğrulandı artık giriş yapabilirsiniz!" : null);
+  const [Status, setStatus] = useState<any>(null);
   const dispatch: Dispatch<any> = useDispatch();
   const actionLogin = React.useCallback((data: User) => dispatch(ResolverLogIn(data)), [dispatch]);
   const actionAnnouncement = React.useCallback((data: Announcement[]) => dispatch(GetAnnouncements(data)), [dispatch]);
   const actionUpdates = React.useCallback((data: Update[]) => dispatch(GetUpdate(data)), [dispatch]);
+
+  useEffect(() => {
+    if (confirmId) {
+      axios
+        .get(`confirmation/${confirmId}`)
+        .then((res) => {
+          setStatus(res.data.message);
+        })
+        .catch((error) => {
+          console.log(error);
+          setError("Doğrulama esnasında hata oluştu!");
+        });
+    }
+  }, [confirmId]);
 
   const LogIn = (e: BaseSyntheticEvent) => {
     e.preventDefault();

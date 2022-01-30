@@ -16,6 +16,7 @@ import WhitelistBasvuru_Exam from "../pages/WhitelistBasvuru_Exam";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
+import Rules from "../pages/Rules";
 library.add(faSpinner);
 
 interface Props {}
@@ -43,7 +44,8 @@ const Routing = (props: Props) => {
         }
       })
       .catch((error) => {
-        console.error("Error: " + error);
+        // console.error("Error: " + error);
+        actionLogoff();
       });
   }, []);
 
@@ -59,8 +61,8 @@ const Routing = (props: Props) => {
         {!user || !user.id ? (
           <>
             <Route path="*" element={<Redirect direction={"/login"} />} />
-            <Route path="/login" element={<Login confirmed={false} />} />
-            <Route path="/login/:id" element={<Login confirmed={true} />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/login/:confirmId" element={<Login />} />
             <Route path="register" element={<Register />} />
           </>
         ) : user.whitelist === true ? (
@@ -73,7 +75,9 @@ const Routing = (props: Props) => {
             <Route path="*" element={<Redirect direction={"/"} />} />
             <Route path="/" element={<App />} />
             <Route path="whitelist-basvuru" element={<WhitelistBasvuru />} />
+            <Route path="whitelist-basvuru/:result" element={<WhitelistBasvuru />} />
             <Route path="whitelist-exam" element={<WhitelistBasvuru_Exam />} />
+            <Route path="kurallar" element={<Rules />} />
           </>
         )}
       </Routes>
@@ -88,7 +92,7 @@ export const LoadingComponent = (props: any) => {
         <FontAwesomeIcon className="col-12 h-100 " icon="spinner" pulse size="2x" />
       </div>
       <div className="container mainpage-wrapper">
-        <div className="mainpage-container">
+        <div className="mainpage-container mt-4">
           <div className="flex col-12 pt-2">
             <div
               className="mainpage-maincontent shadow-md text-center col-12 px-4 pb-4"

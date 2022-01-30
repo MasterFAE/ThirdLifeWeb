@@ -40,6 +40,6 @@ html {
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: var(--brandColor);
+  background: #352700;
   border-radius: 10px;
 }

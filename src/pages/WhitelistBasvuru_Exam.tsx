@@ -1,9 +1,11 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import NonWLSidebar from "../components/NonWLSidebar";
 import { User } from "../redux/types";
+import { Dispatch } from "redux";
+import { useDispatch } from "react-redux";
 
 type Props = {};
 type Option = {
@@ -30,15 +32,22 @@ const WhitelistBasvuru_Exam = (props: Props) => {
   const user: User = useSelector((state) => state.user);
   const [Questions, setQuestions] = useState<Question[]>([]);
   const [testId, setTestId] = useState<number>();
+  const dispatch: Dispatch<any> = useDispatch();
+  let navigate = useNavigate();
   useEffect(() => {
     axios
       .get("whitelist-basvuru")
       .then((res) => {
+        if (res.data.error) {
+          navigate("/whitelist-basvuru");
+          return;
+        }
         setTestId(res.data.id);
         setQuestions(res.data.questions);
       })
       .catch((err) => {
         console.error(err);
+        navigate("/whitelist-basvuru");
       });
   }, []);
 
@@ -48,10 +57,14 @@ const WhitelistBasvuru_Exam = (props: Props) => {
     setQuestions([...dummy]);
   };
 
-  const SendTest = () => {
+  const SendTest = (e: React.BaseSyntheticEvent) => {
+    e.preventDefault();
     axios
       .post("whitelist-basvuru", { userid: user.id, timer: 0, id: testId, test: Questions, discord: user.discord })
-      .then((res) => console.log(res))
+      .then((res) => {
+        let result = res.data.result === 1 ? "basarili" : "basarisiz";
+        navigate("/whitelist-basvuru/" + result);
+      })
       .catch((error) => console.error(error));
   };
 
@@ -63,12 +76,12 @@ const WhitelistBasvuru_Exam = (props: Props) => {
           <h1> Whitelist Başvuru </h1>
         </div> */}
         <div className="mainpage-container">
-          <div className="flex col-12 pt-2">
-            <div className="mainpage-maincontent shadow-md col-12 px-4  ">
+          <div className="flex col-12 pt-2 mt-4">
+            <div className="mainpage-maincontent shadow-md col-12 px-4 py-4">
               <div className="basvuru-content-header flex flex-row flex-wrap mb-3 text-center">
                 <h4 className="col-12 mt-4">Whitelist Başvuru Formu</h4>
                 <Link className="col-12 mt-3" to={"/"}>
-                  <button className="btn col-12 btn-success" onClick={(e) => SendTest()}>
+                  <button className="btn col-12 btn-success" onClick={(e) => SendTest(e)}>
                     Gönder
                   </button>
                 </Link>
@@ -82,13 +95,13 @@ const WhitelistBasvuru_Exam = (props: Props) => {
                           <h6 className="text-sm font-semibold select-none">
                             Soru {key + 1}:{" "}
                             {item.type === "multi-line" /* @ts-ignore  */
-                              ? item.question.map((x: string) => {
+                              ? item.question.map((x: string, key3) => {
                                   return (
-                                    <>
+                                    <span key={key3}>
                                       {" "}
                                       <br />
                                       {x}
-                                    </>
+                                    </span>
                                   );
                                 })
                               : item.question}

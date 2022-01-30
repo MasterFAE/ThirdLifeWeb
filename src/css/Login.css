@@ -55,6 +55,17 @@
   border-color: var(--brandColor);
   background-color: var(--brandColor);
 }
+.danger-button {
+  border-color: var(--redColor);
+  background-color: var(--redColor);
+  color: var(--textHoverColor);
+  cursor: default;
+}
+.danger-button:hover {
+  border-color: var(--redColor);
+  color: var(--textHoverColor);
+  background-color: var(--redColor);
+}
 
 .login-extra-link {
   font-weight: 400;

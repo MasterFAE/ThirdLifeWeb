@@ -35,9 +35,15 @@ const NonWLSidebar = (props: Props) => {
                   <Link to={"/"} className="sidebar-category-item">
                     Anasayfa
                   </Link>
-                  <a className="sidebar-category-item">Yönetim Ekibi</a>
-                  <a className="sidebar-category-item">Ticket</a>
-                  <a className="sidebar-category-item">Kurallar</a>
+                  <Link to={"/yonetim"} className="sidebar-category-item">
+                    Yönetim Ekibi
+                  </Link>
+                  <Link to={"/ticket"} className="sidebar-category-item">
+                    Ticket
+                  </Link>
+                  <Link to={"/kurallar"} className="sidebar-category-item">
+                    Kurallar
+                  </Link>
                 </div>
               </div>
             </div>

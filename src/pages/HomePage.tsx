@@ -14,9 +14,9 @@ const HomePage = (props: Props) => {
   const user: User = useSelector((state) => state.user);
   if (user.whitelist) {
     return (
-      <main className="main-wrapper flex">
+      <main className="container-fluid main-wrapper flex">
         <Sidebar />
-        <div className="container mainpage-wrapper">
+        <div className="mainpage-wrapper">
           {/* <div className="mainpage-header ">
             <h1> Anasayfa </h1>
           </div> */}
