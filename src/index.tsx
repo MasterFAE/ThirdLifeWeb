@@ -11,9 +11,10 @@ import thunk from "redux-thunk";
 import user from "./redux/reducers/userReducer";
 import general from "./redux/reducers/generalReducer";
 
-axios.defaults.baseURL = "http://localhost:5555/";
+// axios.defaults.baseURL = "http://localhost:5555/";
+axios.defaults.baseURL = "https://37.122.140.155:5555/";
 axios.defaults.withCredentials = true;
-axios.defaults.headers.post["Content-Type"] = "application/json";
+// axios.defaults.headers.post["Content-Type"] = "application/json";
 
 const rootReducer = combineReducers({ user, general });
 

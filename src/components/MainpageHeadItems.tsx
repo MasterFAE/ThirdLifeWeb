@@ -24,12 +24,12 @@ const MainpageHeadItems = (props: Props) => {
         <p className="text-lg font-semibold mb-2 mainpage-head-contentitem-title">{title}</p>
         <div className="mainpage-head-content-subitem ml-1 flex flex-row">
           <span className="col-6 float-left">
-            <p className="text-lg font-semibold mb-0 ml-1 mt-0">{data}</p>
+            <p className="text-lg font-semibold mb-0 ml-0 mt-0">{data}</p>
             <ul className="list-none p-0">
               {categories.map((item) => {
                 return (
-                  <p className="text-xs m-0 font-medium">
-                    {item.data} {item.title}
+                  <p className="text-xs m-0 mt-2 font-medium">
+                    {item.title}: {item.data}
                   </p>
                 );
               })}

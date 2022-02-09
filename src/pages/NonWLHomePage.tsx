@@ -4,7 +4,7 @@ import { Dispatch } from "redux";
 import { useDispatch, useSelector } from "react-redux";
 import NonWLSidebar from "../components/NonWLSidebar";
 import { Announcement } from "../redux/types";
-import { Update } from "@reduxjs/toolkit";
+import MainpageHeadItems from "../components/MainpageHeadItems";
 
 type Props = {};
 
@@ -20,7 +20,30 @@ const NonWLHomePage = (props: Props) => {
         {/* <div className="mainpage-header ">
           <h1> Anasayfa </h1>
         </div> */}
-        <div className="mainpage-container ">
+        <div className="mainpage-container mt-3">
+          <div className="flex flex-wrap flex-md-wrap col-12">
+            <MainpageHeadItems
+              title="Başvuru Sayısı"
+              data={"193 başvuru"}
+              categories={[{ title: "Geçen Haftaya Oranla Artış", data: "6%" }]}
+            />
+            <MainpageHeadItems
+              title="Kabul Edilen"
+              data={"66 başvuru"}
+              categories={[
+                { title: "Ortalama Doğru Cevap", data: "16" },
+                { title: "Ortalama Süre", data: "44 dakika" },
+              ]}
+            />
+            <MainpageHeadItems
+              title="Reddedilen"
+              data={"127 başvuru"}
+              categories={[
+                { title: "En çok yanlış yapılan kategori", data: "ME/DO" },
+                { title: "Ortalama Yanlış Cevap", data: "4" },
+              ]}
+            />
+          </div>
           <div className="flex flex-row flex-wrap col-12">
             <div className="mainpage-maincontent shadow-md col-6 px-4 pt-3 my-2">
               <div className="mainpage-maincontent-header">
@@ -50,7 +73,7 @@ const NonWLHomePage = (props: Props) => {
   );
 };
 
-const Item = (props: any) => {
+export const Item = (props: any) => {
   const { item } = props;
   return (
     <div className="mainpage-subcontent shadow-md">

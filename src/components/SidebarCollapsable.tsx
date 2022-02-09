@@ -29,7 +29,7 @@ const Collapsable = (props: CollapsableProps) => {
               setCollapsable(!collapsable);
             }}
             className="sidebar-icon transition-all cursor-pointer"
-            style={{ marginTop: "1vh", marginLeft: "1vh" }}
+            style={{ marginTop: "0.75vh", marginLeft: "0.5vh" }}
             icon={!collapsable ? ["fas", "chevron-circle-right"] : ["fas", "chevron-circle-down"]}
             size="xs"
           />

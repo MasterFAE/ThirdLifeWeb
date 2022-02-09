@@ -16,7 +16,7 @@ const WhitelistBasvuru = (props: Props) => {
   useEffect(() => {
     if (result) {
       if (result === "basarili") {
-        setStatus("Başvurun onaylandı, discord sunucumuzda mülakat perminizi kontrol edin.");
+        setStatus("Mülakata hak kazandın, lütfen discord sunucusunda mülakat kanalını kontrol edin");
       } else if (result === "basarisiz") {
         setError("Başvurun reddedildi.");
       }
@@ -34,12 +34,12 @@ const WhitelistBasvuru = (props: Props) => {
       <NonWLSidebar />
       <div className="mainpage-wrapper ">
         {Error && (
-          <div className="alert alert-danger mb-2 mt-4 p-0" role="alert">
+          <div className="alert alert-danger mb-2 mt-4 p-0" id="error-alert" role="alert">
             <p className="font-semibold text-center h-full w-full break-words p-1 mb-0 overflow-hidden">{Error}</p>
           </div>
         )}
         {Status && (
-          <div className="alert alert-success mb-2 mt-4 p-0" role="alert">
+          <div className="alert alert-success mb-2 mt-4 p-0" id="status-alert" role="alert">
             <p className="font-semibold text-center h-full w-full break-words p-1 mb-0 overflow-hidden">{Status}</p>
           </div>
         )}

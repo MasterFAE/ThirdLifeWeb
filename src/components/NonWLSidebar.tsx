@@ -1,10 +1,47 @@
+import "../css/HomePage.css";
 import axios from "axios";
 import React from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { Dispatch } from "redux";
 import { LogOff as ResolverLogOff } from "../redux/resolvers/userResolver";
-import "../css/HomePage.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import {
+  faUser,
+  faBook,
+  faUsers,
+  faHouseUser,
+  faUserNurse,
+  faUserNinja,
+  faUserTie,
+  faHome,
+  faQuestionCircle,
+  faInfo,
+  faEnvelope,
+  faUserCog,
+  faSignOutAlt,
+  faChevronDown,
+  faChevronLeft,
+  faPaperPlane,
+} from "@fortawesome/free-solid-svg-icons";
+library.add(
+  faUser,
+  faChevronDown,
+  faChevronLeft,
+  faUsers,
+  faHouseUser,
+  faUserNurse,
+  faUserNinja,
+  faUserTie,
+  faHome,
+  faQuestionCircle,
+  faInfo,
+  faEnvelope,
+  faUserCog,
+  faSignOutAlt,
+  faPaperPlane
+);
 
 type Props = {};
 
@@ -32,18 +69,26 @@ const NonWLSidebar = (props: Props) => {
               <div className="sidebar-category">
                 <p className="sidebar-category-header text-md opacity-80 font-semibold mb-0 ">Genel</p>
                 <div className="sidebar-category-list flex flex-col">
-                  <Link to={"/"} className="sidebar-category-item">
-                    Anasayfa
-                  </Link>
-                  <Link to={"/yonetim"} className="sidebar-category-item">
-                    Yönetim Ekibi
-                  </Link>
-                  <Link to={"/ticket"} className="sidebar-category-item">
-                    Ticket
-                  </Link>
-                  <Link to={"/kurallar"} className="sidebar-category-item">
-                    Kurallar
-                  </Link>
+                  <span className="flex">
+                    <FontAwesomeIcon className="sidebar-icon" icon={["fas", "home"]} size="xs" />
+                    <Link to={"/"} className="sidebar-category-item">
+                      Anasayfa
+                    </Link>
+                  </span>
+                  <span className="flex">
+                    <FontAwesomeIcon className="sidebar-icon" icon={["fas", "users"]} size="xs" />
+                    <a className="sidebar-category-item">Yönetim Ekibi</a>
+                  </span>
+                  <span className="flex">
+                    <FontAwesomeIcon className="sidebar-icon" icon={["fas", "envelope"]} size="xs" />
+                    <a className="sidebar-category-item">Ticket</a>
+                  </span>
+                  <span className="flex">
+                    <FontAwesomeIcon className="sidebar-icon" icon={["fas", "book"]} size="xs" />
+                    <Link to={"/kurallar"} className="sidebar-category-item">
+                      Kurallar
+                    </Link>
+                  </span>
                 </div>
               </div>
             </div>
@@ -54,9 +99,12 @@ const NonWLSidebar = (props: Props) => {
             <div className="sidebar-category">
               <p className="sidebar-category-header text-md opacity-80 font-semibold mb-0">Başvuru</p>
               <div className="sidebar-category-list flex flex-col">
-                <Link to={"/whitelist-basvuru"} className="sidebar-category-item">
-                  Karakter Başvurusu
-                </Link>
+                <span className="flex">
+                  <FontAwesomeIcon className="sidebar-icon" icon={["fas", "user-plus"]} size="xs" />
+                  <Link to={"/whitelist-basvuru"} className="sidebar-category-item">
+                    Karakter Başvurusu
+                  </Link>
+                </span>
               </div>
             </div>
           </div>
@@ -66,12 +114,24 @@ const NonWLSidebar = (props: Props) => {
             <div className="sidebar-category">
               <p className="sidebar-category-header text-md opacity-80 font-semibold mb-0">Diğer</p>
               <div className="sidebar-category-list flex flex-col">
-                <a className="sidebar-category-item">Sıkça Sorulanlar</a>
-                <a className="sidebar-category-item">İletişim</a>
-                <a className="sidebar-category-item">Ayarlar</a>
-                <a className="sidebar-category-item" onClick={() => LogOff()}>
-                  Çıkış Yap
-                </a>
+                <span className="flex">
+                  <FontAwesomeIcon className="sidebar-icon" icon={["fas", "question-circle"]} size="xs" />
+                  <a className="sidebar-category-item">Sıkça Sorulanlar</a>
+                </span>
+                <span className="flex">
+                  <FontAwesomeIcon className="sidebar-icon" icon={["fas", "info"]} size="xs" />
+                  <a className="sidebar-category-item ml-1">İletişim</a>
+                </span>
+                <span className="flex">
+                  <FontAwesomeIcon className="sidebar-icon" icon={["fas", "user-cog"]} size="xs" />
+                  <a className="sidebar-category-item">Ayarlar</a>
+                </span>
+                <span className="flex">
+                  <FontAwesomeIcon className="sidebar-icon" icon={["fas", "sign-out-alt"]} size="xs" />
+                  <a className="sidebar-category-item" onClick={() => LogOff()}>
+                    Çıkış Yap
+                  </a>
+                </span>
               </div>
             </div>
           </div>

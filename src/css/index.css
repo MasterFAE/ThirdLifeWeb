@@ -5,7 +5,7 @@
 :root {
   --bgpage: #20202000;
   /* --bgcontent: #331a04a1; */
-  --bgcontent: #000000be;
+  --bgcontent: #000000b6;
   /* --tw-gradient-stops: var(--redColor), var(--brandColor); */
   --tw-gradient-stops: #c98d1d, #fcb42b, #ffb333, #d4a333;
   --brandColor: #fdb629;
@@ -15,7 +15,7 @@
   --redColor: #b11315; /*#d63c30 */
   --greenColor: #2ecc71;
   --bginput: #20202000;
-  --bglogin: #1a1a1ad7;
+  --bglogin: #1a1a1ad5;
 }
 
 #root {

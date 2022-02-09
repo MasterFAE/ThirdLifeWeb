@@ -13,9 +13,11 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import {
   faUser,
   faUsers,
+  faBook,
   faHouseUser,
   faUserNurse,
   faUserNinja,
+  faUserPlus,
   faUserTie,
   faHome,
   faQuestionCircle,
@@ -26,9 +28,13 @@ import {
   faChevronDown,
   faChevronLeft,
   faPaperPlane,
+  faChessRook,
+  faUserShield,
 } from "@fortawesome/free-solid-svg-icons";
 library.add(
   faUser,
+  faBook,
+  faUserPlus,
   faChevronDown,
   faChevronLeft,
   faUsers,
@@ -42,17 +48,17 @@ library.add(
   faEnvelope,
   faUserCog,
   faSignOutAlt,
-  faPaperPlane
+  faPaperPlane,
+  faChessRook,
+  faUserShield
 );
 
 interface Props {}
 
 const Sidebar = (props: Props) => {
   const dispatch: Dispatch<any> = useDispatch();
-  const user: User = useSelector((state) => state);
+  // const user: User = useSelector((state) => state);
   const actionLogoff = React.useCallback(() => dispatch(ResolverLogOff()), [dispatch]);
-
-  const [policeCollapsable, setpoliceCollapsable] = useState(false);
 
   const LogOff = () => {
     axios.delete("logoff").then((res) => {
@@ -89,6 +95,12 @@ const Sidebar = (props: Props) => {
                     <FontAwesomeIcon className="sidebar-icon" icon={["fas", "envelope"]} size="xs" />
                     <a className="sidebar-category-item">Ticket</a>
                   </span>
+                  <span className="flex">
+                    <FontAwesomeIcon className="sidebar-icon" icon={["fas", "book"]} size="xs" />
+                    <Link to={"/kurallar"} className="sidebar-category-item">
+                      Kurallar
+                    </Link>
+                  </span>
                 </div>
               </div>
             </div>
@@ -103,7 +115,7 @@ const Sidebar = (props: Props) => {
                 </span>
                 <span className="flex">
                   <FontAwesomeIcon className="sidebar-icon" icon={["fas", "users"]} size="xs" />
-                  <a className="sidebar-category-item">Karakterim</a>
+                  <a className="sidebar-category-item">Karakterler</a>
                 </span>
                 <span className="flex">
                   <FontAwesomeIcon className="sidebar-icon" icon={["fas", "user-ninja"]} size="xs" />
@@ -127,19 +139,19 @@ const Sidebar = (props: Props) => {
               <p className="text-md opacity-80 font-semibold mb-0 sidebar-category-header">Başvuru</p>
               <div className="sidebar-category-list flex flex-col">
                 <span className="flex">
-                  <FontAwesomeIcon className="sidebar-icon" icon={["fas", "paper-plane"]} size="xs" />
+                  <FontAwesomeIcon className="sidebar-icon" icon={["fas", "user"]} size="xs" />
                   <a className="sidebar-category-item">Karakter Başvurusu</a>
                 </span>
                 <span className="flex">
-                  <FontAwesomeIcon className="sidebar-icon" icon={["fas", "paper-plane"]} size="xs" />
+                  <FontAwesomeIcon className="sidebar-icon" icon={["fas", "users"]} size="xs" />
                   <a className="sidebar-category-item">Birlik Başvurusu</a>
                 </span>
                 <span className="flex">
-                  <FontAwesomeIcon className="sidebar-icon" icon={["fas", "paper-plane"]} size="xs" />
+                  <FontAwesomeIcon className="sidebar-icon" icon={["fas", "chess-rook"]} size="xs" />
                   <a className="sidebar-category-item">Rol Başvurusu</a>
                 </span>
                 <span className="flex">
-                  <FontAwesomeIcon className="sidebar-icon" icon={["fas", "paper-plane"]} size="xs" />
+                  <FontAwesomeIcon className="sidebar-icon" icon={["fas", "user-shield"]} size="xs" />
                   <a className="sidebar-category-item">Rol Ekibi Başvurusu</a>
                 </span>
               </div>
